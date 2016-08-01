@@ -45,11 +45,36 @@ window.addEventListener('load', function() {
 
 	//When next is clicked on first part, see if the album already exists
 	next.addEventListener('click', function() {
+
+		var albumName = musicform[0].value;
+		var artistName = musicform[1].value;
+
 		var request = new XMLHttpRequest();
 
-		var musicformdata = new DataForm(musicform);
+		//open the album info to check that the album doesn't already exist
+		request.open('GET', 'album_info.json');
+		request.send()
 
-		request.open
+		//When file loads, check  to see if the album name exists
+		//if it exists then check if it's by the same artist
+		//if it's the same album and artist, return a message that says "album exists"
+		request.addEventListener('load', function(e){
+
+			var allalbums = JSON.parse(e.target.response);
+
+			var allAlbumTitles = [];
+
+			for (var i = 0; i < allalbums.length; i++) {
+				if (allalbums[i].album == albumName && allalbums[i].artist == artistName){
+					alert("This album already exists.")
+				}
+				else {
+					alert("This album doesn't exist.")
+				}
+			};
+
+
+		})
 
 
 	})
