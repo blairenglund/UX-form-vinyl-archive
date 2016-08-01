@@ -9,15 +9,34 @@
 <body class="background">
 
 <div class="main">
-	<div class="header">
-		<div class="header__logo"></div>
-		<a href="/" class="header__name">The Vinyl Archive</a>
-		<a href="http://hearnebraska.org" class="header__link">by Hear Nebraska</a>
-		<a class="header__add">ADD AN ALBUM</a>
+	<div id="headerform" class="headerform">
+
+		<div id="close" class="headerform__close">x</div>
+
+		<form id="musicform" class="musicform">
+			<div id="musicform-part1">
+				<label>Album Title</label>
+				<input type="text" name="title">
+				<label>Artist Name(s)</label>
+				<input type="text" name="title">
+			</div>
+		</form>
+
+		<div class="l-header">
+			<div class="headerform__logo"></div>
+			<a href="/" class="headerform__name">The Vinyl Archive</a>
+			<a href="http://hearnebraska.org" class="headerform__link">by Hear Nebraska</a>
+			<a id="addAlbum" class="headerform__add">ADD AN ALBUM</a>
+		</div>
+
 	</div>
+
 	<div class="search"></div>
+
 	<div class="results"></div>
+
 	<div class="filters"></div>
+	
 </div>
 
 </body>
