@@ -13,12 +13,14 @@
 
 		<div id="close" class="headerform__close">x</div>
 
-		<form id="musicform" class="musicform">
-			<div id="musicform-part1">
-				<label>Album Title</label>
-				<input type="text" name="title">
-				<label>Artist Name(s)</label>
-				<input type="text" name="title">
+		<form id="musicform">
+			<div id="musicform-part1" class="musicform">
+				<label class="musicform__label">Album Title</label>
+				<input class="musicform__textinput" type="text" name="title">
+				<label class="musicform__label">Artist Name(s)</label>
+				<input class="musicform__textinput" type="text" name="title">
+				<p class="musicform__subtext">Separate multiple artists with a comma.</p>
+				<div id="nextbutton" class="musicform__button">></div>
 			</div>
 		</form>
 
@@ -36,7 +38,7 @@
 	<div class="results"></div>
 
 	<div class="filters"></div>
-	
+
 </div>
 
 </body>

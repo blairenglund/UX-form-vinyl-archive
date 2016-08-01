@@ -12,6 +12,7 @@
 .headerform{
 	background-color: #333;
 	height: 90px;
+	height: 600px; /*  FOR TESTING  */
 	width: 1000px;
 	display: flex;
 	flex-flow: column nowrap;
@@ -66,18 +67,70 @@
 
 .headerform__close{
 	color: #FFF;
+	font-size: 20px;
 	background-color: #555;
 	font-family: sans-serif;
 	display: none;
+	display: block; /*  FOR TESTING  */
 	align-self: flex-end;
 	padding: 5px 10px;
 	cursor: pointer;
 }
 
-.musicform{
+#musicform{
+	padding-top: 40px;
 	display: none;
-	flex-flow: column nowrap;
+	display: block; /*  FOR TESTING  */
 }
+
+.musicform{
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+.musicform__label{
+	color: #FFF;
+	font-size: 22px;
+	font-family: "Oswald", sans-serif;
+	font-weight: 300;
+	margin: 8px 4px 4px 4px;
+}
+
+.musicform__textinput{
+	border: none;
+	height: 34px;
+	width: 300px;
+	margin: 4px;
+	border-radius: 4px;
+	font-size: 20px;
+	font-family: "Oswald", sans-serif;
+	padding-left: 10px;
+}
+
+.musicform__subtext{
+	color: #999;
+	font-family: "Oswald", sans-serif;
+	font-weight: 300;
+	margin: 3px;
+	width: 300px;
+	font-style: italic;
+}
+
+.musicform__button{
+	background-color: #555;
+	height: 30px;
+	width: 30px;
+	border-radius: 2px;
+	margin: 20px;
+	text-align: center;
+	font-size: 24px;
+	color: #FFF;
+	cursor: pointer;
+}
+
+
+
 
 
 
