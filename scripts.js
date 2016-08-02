@@ -143,4 +143,30 @@ window.addEventListener('load', function() {
 		}
 	});
 
+
+	//NEXT BUTTON LISTENER
+	last.addEventListener('click', function(){
+		if (currentP == musicformP2) {
+			currentP = musicformP1;
+			musicformP2.style.display = 'none';
+			musicformP1.style.display = 'flex';
+		}
+		else if (currentP == musicformP3) {
+			currentP = musicformP2;
+			musicformP3.style.display = 'none';
+			musicformP2.style.display = 'flex';
+		}
+		else if (currentP == musicformP4) {
+			currentP = musicformP3;
+			musicformP4.style.display = 'none';
+			musicformP3.style.display = 'flex';
+		}
+		else if (currentP == musicformP5) {
+			currentP = musicformP4;
+			musicformP5.style.display = 'none';
+			musicformP4.style.display = 'flex';
+		}
+	
+	})
+
 })
