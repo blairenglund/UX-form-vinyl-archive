@@ -17,9 +17,9 @@
 
 			<div id="musicform-part1" class="musicform">
 				<label class="musicform__label">Album Title</label>
-				<input class="musicform__textinput" type="text" name="album">
+				<input class="musicform__textinput" type="text" name="album" value="Icky Blossoms">
 				<label class="musicform__label">Artist Name(s)</label>
-				<input class="musicform__textinput" type="text" name="artist">
+				<input class="musicform__textinput" type="text" name="artist" value="Icky Blossoms">
 				<p class="musicform__subtext">Separate multiple artists with a comma.</p>
 			</div>
 
@@ -47,6 +47,35 @@
 				</div>
 			</div>
 
+			<div id="musicform-part4" class="musicform">
+				<label class="musicform__label">Album Genre</label>
+				<input class="musicform__textinput" type="text" name="genre" value="alternative">
+				
+				<label class="musicform__label">Release Date</label>
+				<input class="musicform__textinput" type="text" name="genre" value="2015">
+
+				<label class="musicform__label">Album Format</label>
+				<select name="format" class="musicform__select">
+					<option value="lp">LP</option>
+					<option value="ep">EP</option>
+					<option value="single">Single</option>
+				</select>
+
+			</div>
+
+			<div id="musicform-part5" class="musicform">
+				<label class="musicform__label">Album Tracks</label>
+				<div class="musicform__imageform">
+					<div class="imageform">
+						<input class="musicform__textinput" type="text" name="genre" placeholder="Track title">
+						<div class="musicform__fileupload">
+								<input class="musicform__uploadbutton" type="button" name="file" value="Choose file">
+								<p class="musicform__subtext">No file chosen</p>
+						</div>
+					</div>
+					<div id="addimagebutton" class="musicform__addbutton">+</div>
+				</div>
+			</div>
 
 			<div id="buttons">	
 				<div id="lastbutton" class="musicform__button"><</div>

@@ -31,6 +31,12 @@ window.addEventListener('load', function() {
 	var musicformP3 = document.getElementById('musicform-part3');
 	//fourth part - genre, date, format
 	var musicformP4 = document.getElementById('musicform-part4');
+	//fifth part - tracklisting
+	var musicformP5 = document.getElementById('musicform-part5');
+
+
+	//keep track of current part of form
+	var currentP = '';
 
 
 
@@ -40,17 +46,25 @@ window.addEventListener('load', function() {
 	addAlbum.addEventListener("click", function() {
 		headerform.style.height = "600px";
 		musicform.style.display = "block";
+		musicformP1.style.display = "flex";
 		close.style.display = "block";
-		next.style.display = 'block';
+		next.style.display = "block";
+		currentP = musicformP1;
+		debugger;
 	});
 
 	//Close form and shrink header
 	close.addEventListener("click", function() {
 		headerform.style.height = "90px";
 		musicform.style.display = "none";
+		musicformP1.style.display = "none";
+		musicformP2.style.display = "none";
+		musicformP3.style.display = "none";
+		musicformP4.style.display = "none";
 		next.style.display = "none";
-		last.style.display = "none"
+		last.style.display = "none";
 		close.style.display = "none";
+		currentP = '';
 		musicform.reset();
 	})
 
@@ -58,53 +72,75 @@ window.addEventListener('load', function() {
 
 	//FORM INPUT AND SUBMISSION ----------------------------------------------------
 
+	//NEXT BUTTON EVENT LISTENER
 	//When next is clicked on first part, see if the album already exists
+	
 	next.addEventListener('click', function() {
+		if (currentP == musicformP1) {
 
-		var albumName = musicform[0].value;
-		var artistName = musicform[1].value;
+			var albumName = musicform[0].value;
+			var artistName = musicform[1].value;
 
-		var request = new XMLHttpRequest();
+			var request = new XMLHttpRequest();
 
-		//open the album info to check that the album doesn't already exist
-		request.open('GET', 'album_info.json');
-		request.send()
+			//open the album info to check that the album doesn't already exist
+			request.open('GET', 'album_info.json');
+			request.send()
 
-		//When file loads, check  to see if the album name exists
-		//if it exists then check if it's by the same artist
-		//if it's the same album and artist, return a message that says "album exists"
-		request.addEventListener('load', function(e){
+			//When file loads, check  to see if the album name exists
+			//if it exists then check if it's by the same artist
+			//if it's the same album and artist, return a message that says "album exists"
+			request.addEventListener('load', function(e){
 
-			var allalbums = JSON.parse(e.target.response);
+				var allalbums = JSON.parse(e.target.response);
 
-			function checkAlbumExists() {
-				for (var i = 0; i < allalbums.length; i++) {
-					if (allalbums[i].album == albumName && allalbums[i].artist == artistName){
-						return 0;
-					}
-					else if (allalbums[i].album != albumName && allalbums[i].artist == artistName) {
-						return 1;
+				function checkAlbumExists() {
+					for (var i = 0; i < allalbums.length; i++) {
+						if (allalbums[i].album == albumName && allalbums[i].artist == artistName){
+							return 0;
+						}
+						else if (allalbums[i].album != albumName && allalbums[i].artist == artistName) {
+							return 1;
+						}
 					}
 				}
-			}
 
-			if (checkAlbumExists() == 0) {
-				alert("album exists")
-			}
-			else if (checkAlbumExists() == 1 ) {
-				musicformP1.style.display = 'none';
-				musicformP3.style.display = 'block';
-			}
-			else {
-				musicformP1.style.display = 'none';
-				musicformP2.style.display = 'block';
-			}
-		});
-	})
+				if (checkAlbumExists() == 0) {
+					alert("album exists")
+				}
+				else if (checkAlbumExists() == 1 ) {
+					musicformP1.style.display = 'none';
+					last.style.display = 'block'
+					currentP = musicformP3;
+					musicformP3.style.display = 'flex';
+				}
+				else {
+					musicformP1.style.display = 'none';
+					musicformP2.style.display = 'flex';
+					currentP = musicformP2;
+					last.style.display = 'block'
+				}
+			});
+		}
 
+		else if (currentP == musicformP2) {
+			musicformP2.style.display = 'none';
+			musicformP3.style.display = 'flex';
+			currentP = musicformP3;
+		}
 
+		else if (currentP == musicformP3) {
+			musicformP3.style.display = 'none';
+			musicformP4.style.display = 'flex';
+			currentP = musicformP4;
+		}
 
-
-
+		else if (currentP == musicformP4) {
+			musicformP4.style.display = 'none';
+			musicformP5.style.display = 'flex';
+			currentP = musicformP5;
+			next.style.display = "none";
+		}
+	});
 
 })

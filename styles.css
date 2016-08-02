@@ -12,7 +12,7 @@
 .headerform{
 	background-color: #333;
 	height: 90px;
-	height: 600px; /*  FOR TESTING  */
+	/*height: 600px;   FOR TESTING  */
 	width: 1000px;
 	display: flex;
 	flex-flow: column nowrap;
@@ -71,7 +71,7 @@
 	background-color: #555;
 	font-family: sans-serif;
 	display: none;
-	display: block; /*  FOR TESTING  */
+	/*display: block;   FOR TESTING  */
 	align-self: flex-end;
 	padding: 5px 10px;
 	cursor: pointer;
@@ -80,11 +80,10 @@
 #musicform{
 	padding-top: 40px;
 	display: none;
-	display: block; /*  FOR TESTING  */
+	/* display: block;  FOR TESTING  */
 }
 
 #musicform-part1{
-	display: none;
 }
 
 #musicform-part2{
@@ -93,7 +92,15 @@
 
 #musicform-part3{
 	display: none;
-	display: flex; /*  FOR TESTING  */
+	/*display: block;   FOR TESTING  */
+}
+
+#musicform-part4{
+	display: none;
+}
+
+#musicform-part5{
+	display: none;
 }
 
 .musicform{
@@ -178,9 +185,16 @@
 	margin-left: 10px;
 	cursor: pointer;
 }
-
 #buttons{
 	display: flex;
+}
+
+#lastbutton{
+	display: none;
+}
+
+#nextbutton{
+	display: none;
 }
 
 
