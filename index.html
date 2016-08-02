@@ -14,14 +14,45 @@
 		<div id="close" class="headerform__close">x</div>
 
 		<form id="musicform" method="post">
+
 			<div id="musicform-part1" class="musicform">
 				<label class="musicform__label">Album Title</label>
 				<input class="musicform__textinput" type="text" name="album">
 				<label class="musicform__label">Artist Name(s)</label>
 				<input class="musicform__textinput" type="text" name="artist">
 				<p class="musicform__subtext">Separate multiple artists with a comma.</p>
+			</div>
+
+			<div id="musicform-part2" class="musicform">
+				<form id="artistform"></form>
+			</div>
+
+			<div id="musicform-part3" class="musicform">
+				<label class="musicform__label">Album Images</label>
+				<div class="musicform__imageform">
+					<div class="imageform">
+						<select name="imgtype" class="musicform__select">
+							<option value="cover" selected>Cover</option>
+							<option value="reverse">Reverse</option>
+							<option value="sleeve">Sleeve</option>
+							<option value="insert">Insert</option>
+							<option value="other">Other</option>
+						</select>
+						<div class="musicform__fileupload">
+								<input class="musicform__uploadbutton" type="button" name="file" value="Choose file">
+								<p class="musicform__subtext">No file chosen</p>
+						</div>
+					</div>
+					<div id="addimagebutton" class="musicform__addbutton">+</div>
+				</div>
+			</div>
+
+
+			<div id="buttons">	
+				<div id="lastbutton" class="musicform__button"><</div>
 				<div id="nextbutton" class="musicform__button">></div>
 			</div>
+
 		</form>
 
 		<div class="l-header">

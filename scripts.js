@@ -11,6 +11,9 @@ window.addEventListener('load', function() {
 	//next page button
 	var next = document.getElementById('nextbutton')
 
+	//last page button
+	var last = document.getElementById('lastbutton')
+
 
 	//CHANGING ELEMENTS --------------------------------------------------------------
 
@@ -19,6 +22,15 @@ window.addEventListener('load', function() {
 
 	//music form (appears when "Add an Album" is clicked)
 	var musicform = document.getElementById('musicform');
+
+	//first part of the form - album title and artist
+	var musicformP1 = document.getElementById('musicform-part1');
+	//second part - artist info if needed
+	var musicformP2 = document.getElementById('musicform-part2');
+	//third part - album images
+	var musicformP3 = document.getElementById('musicform-part3');
+	//fourth part - genre, date, format
+	var musicformP4 = document.getElementById('musicform-part4');
 
 
 
@@ -29,12 +41,15 @@ window.addEventListener('load', function() {
 		headerform.style.height = "600px";
 		musicform.style.display = "block";
 		close.style.display = "block";
+		next.style.display = 'block';
 	});
 
 	//Close form and shrink header
 	close.addEventListener("click", function() {
 		headerform.style.height = "90px";
 		musicform.style.display = "none";
+		next.style.display = "none";
+		last.style.display = "none"
 		close.style.display = "none";
 		musicform.reset();
 	})
@@ -62,21 +77,29 @@ window.addEventListener('load', function() {
 
 			var allalbums = JSON.parse(e.target.response);
 
-			var allAlbumTitles = [];
-
-			for (var i = 0; i < allalbums.length; i++) {
-				if (allalbums[i].album == albumName && allalbums[i].artist == artistName){
-					alert("This album already exists.")
+			function checkAlbumExists() {
+				for (var i = 0; i < allalbums.length; i++) {
+					if (allalbums[i].album == albumName && allalbums[i].artist == artistName){
+						return 0;
+					}
+					else if (allalbums[i].album != albumName && allalbums[i].artist == artistName) {
+						return 1;
+					}
 				}
-				else {
-					alert("This album doesn't exist.")
-				}
-			};
+			}
 
-
-		})
-
-
+			if (checkAlbumExists() == 0) {
+				alert("album exists")
+			}
+			else if (checkAlbumExists() == 1 ) {
+				musicformP1.style.display = 'none';
+				musicformP3.style.display = 'block';
+			}
+			else {
+				musicformP1.style.display = 'none';
+				musicformP2.style.display = 'block';
+			}
+		});
 	})
 
 
