@@ -151,12 +151,13 @@ window.addEventListener('load', function() {
 			//the button to add another track
 			var addtrack = document.getElementById('addtrackbutton');
 
-			//the button to go to the previous track
+			//the button to go to the previous track and back
 			var backtrack = document.getElementById('backtrackbutton');
+			var forwardtrack = document.getElementById('fortrackbutton');
 
 			//display of the track number
 			var trackNumDisplay = document.getElementById('tracknumber');
-			var currentTrack = "Track 1";
+			var currentTrack = 1;
 
 			//the div containing tracks
 			var tracks = document.getElementById('tracks');
@@ -169,9 +170,9 @@ window.addEventListener('load', function() {
 				var newtrack = track1.cloneNode(true);
 				tracks.appendChild(newtrack);
 				backtrack.style.display = 'block';
-				currentTrack = `Track ${alltracks.length}`;
+				currentTrack = alltracks.length;
 
-				trackNumDisplay.innerHTML = currentTrack;
+				trackNumDisplay.innerHTML = `Track ${currentTrack}`;
 
 				for (var i = 0; i < alltracks.length; i++) {
 					alltracks[i].style.display = 'none';
@@ -179,6 +180,29 @@ window.addEventListener('load', function() {
 
 				tracks.lastChild.style.display = 'block';
 			});
+
+			backtrack.addEventListener('click', function(){
+				debugger;
+				currentTrack -= 1;
+				trackNumDisplay.innerHTML = `Track ${currentTrack}`;
+			
+				for (var i = 0; i < alltracks.length; i++) {
+					alltracks[i].style.display = 'none';
+				}
+				alltracks[currentTrack - 1].style.display = 'block';
+
+				if (currentTrack == alltracks.length-1){
+					addtrack.style.display = "none";
+					forwardtrack.style.display = "block";
+				}
+				else if (currentTrack == 1) {
+					backtrack.style.display = 'none';
+				}
+
+
+			});
+
+			
 		}
 	});
 
