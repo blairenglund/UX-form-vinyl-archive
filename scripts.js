@@ -187,7 +187,9 @@ window.addEventListener('load', function() {
 					addmember.addEventListener('click', function(){
 						var newmember = member0.cloneNode(true);
 						memberlist.appendChild(newmember);
-						backmember.style.display = 'block';
+
+						if (allmembers.length > 2) {backmember.style.display = 'block';}
+						
 						currentMember = allmembers.length - 1;
 
 						for (var i = 0; i < allmembers.length; i++) {
@@ -205,8 +207,8 @@ window.addEventListener('load', function() {
 					backmember.addEventListener('click', function(){
 						currentMember -= 1;
 					
-						for (var i = 0; i < alltracks.length; i++) {
-							alltracks[i].style.display = 'none';
+						for (var i = 0; i < allmembers.length; i++) {
+							allmembers[i].style.display = 'none';
 						}
 
 						allmembers[currentMember].style.display = 'block';
@@ -273,7 +275,9 @@ window.addEventListener('load', function() {
 			addtrack.addEventListener('click', function(){
 				var newtrack = track0.cloneNode(true);
 				tracklist.appendChild(newtrack);
-				backtrack.style.display = 'block';
+
+				if (alltracks.length > 2) {backtrack.style.display = 'block';}
+				
 				currentTrack = alltracks.length - 1;
 
 				trackNumDisplay.innerHTML = `Track ${currentTrack}`;
@@ -303,7 +307,7 @@ window.addEventListener('load', function() {
 					addtrack.style.display = "none";
 					forwardtrack.style.display = "block";
 				}
-				else if (currentTrack == 1) {
+				else if (currentTrack == 2) {
 					backtrack.style.display = 'none';
 				}
 			});
@@ -333,6 +337,8 @@ window.addEventListener('load', function() {
 
 
 	//LAST BUTTON LISTENER
+
+	//
 	last.addEventListener('click', function(){
 		if (currentP == musicformP2) {
 			currentP = musicformP1;
