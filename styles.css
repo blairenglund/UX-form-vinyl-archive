@@ -201,6 +201,10 @@
 	padding: 0;
 }
 
+#backtrackbutton{
+	display: none;
+}
+
 #buttons{
 	display: flex;
 }

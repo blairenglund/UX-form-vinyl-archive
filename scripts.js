@@ -151,15 +151,33 @@ window.addEventListener('load', function() {
 			//the button to add another track
 			var addtrack = document.getElementById('addtrackbutton');
 
+			//the button to go to the previous track
+			var backtrack = document.getElementById('backtrackbutton');
+
+			//display of the track number
+			var trackNumDisplay = document.getElementById('tracknumber');
+			var currentTrack = "Track 1";
+
 			//the div containing tracks
 			var tracks = document.getElementById('tracks');
 
-			//the first track
-			var track1 = document.getElementsByClassName('track')[0];
+			//the tracks
+			var alltracks = document.getElementsByClassName('track');
+			var track1 = alltracks[0];
 
 			addtrack.addEventListener('click', function(){
 				var newtrack = track1.cloneNode(true);
 				tracks.appendChild(newtrack);
+				backtrack.style.display = 'block';
+				currentTrack = `Track ${alltracks.length}`;
+
+				trackNumDisplay.innerHTML = currentTrack;
+
+				for (var i = 0; i < alltracks.length; i++) {
+					alltracks[i].style.display = 'none';
+				}
+
+				tracks.lastChild.style.display = 'block';
 			});
 		}
 	});
