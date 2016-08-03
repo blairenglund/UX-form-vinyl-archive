@@ -192,12 +192,26 @@
 }
 
 .track{
+	display: none;
 	list-style: none;
 	padding: 0;
 	margin: 0;
 }
 
 #tracks{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.member{
+	display: none;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#members{
 	list-style: none;
 	margin: 0;
 	padding: 0;

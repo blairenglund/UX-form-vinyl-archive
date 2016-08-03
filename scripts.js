@@ -14,6 +14,13 @@ window.addEventListener('load', function() {
 	//last page button
 	var last = document.getElementById('lastbutton')
 
+	//the button to add a band member
+	var addmember = document.getElementById('addmemberbutton');
+
+	//the button to go to previous or next member;
+	var forwardmember = document.getElementById('formemberbutton')
+	var backmember = document.getElementById('backmemberbutton')
+
 	//the button to add another track
 	var addtrack = document.getElementById('addtrackbutton');
 
@@ -45,16 +52,35 @@ window.addEventListener('load', function() {
 	var musicformP5 = document.getElementById('musicform-part5');
 
 
+	//ARTIST INFO ELEMENTS -----------------------------------------------------------
+
+	//the div containing all band members
+	var memberlist = document.getElementById('members');
+
+	//the members
+	var allmembers = document.getElementsByClassName('member');
+
+	//blank member that get duplicated
+	var member0 = document.querySelector('li.member');
+
+	var currentMember = allmembers.length-1;
+
+
+	//TRACKLISTING ELEMENTS ----------------------------------------------------------
+
 	//the div containing tracks
-	var tracks = document.getElementById('tracks');
+	var tracklist = document.getElementById('tracks');
 
 	//the tracks
 	var alltracks = document.getElementsByClassName('track');
-	var track1 = alltracks[0];
-	var currentTrack = 1;
+
+	//the blank track form that gets duplicated
+	var track0 = document.querySelector('li.track');
+
+	var currentTrack = alltracks.length-1;
 
 
-	//keep track of current part of form
+	//keep track of current part of form ----------------------------------------------
 	var currentP = '';
 
 
@@ -74,14 +100,10 @@ window.addEventListener('load', function() {
 		}
 		else if (currentP == musicformP5) {
 			alert('album saved')
-			musicform.reset();
-			currentTrack = 1;
-			trackNumDisplay.innerHTML = `Track ${currentTrack}`;
-			for (var i = 1; i < alltracks.length; i++) {
-				alltracks[i].style.display = 'none'
-				tracks.removeChild(alltracks[i]);
-			}
-			alltracks[currentTrack - 1].style.display = 'block';
+
+			//RECORD THE FORM DATA//
+
+			close.click();
 		}
 	});
 
@@ -99,14 +121,12 @@ window.addEventListener('load', function() {
 		last.style.display = "none";
 		close.style.display = "none";
 		currentP = '';
-		currentTrack = 1;
+		currentTrack = 0;
 		trackNumDisplay.innerHTML = `Track ${currentTrack}`;
 		musicform.reset();
 		for (var i = 1; i < alltracks.length; i++) {
-			alltracks[i].style.display = 'none'
 			tracks.removeChild(alltracks[i]);
 		}
-		alltracks[currentTrack - 1].style.display = 'block';
 	})
 
 
@@ -144,7 +164,7 @@ window.addEventListener('load', function() {
 				}
 
 				if (checkAlbumExists() == 0) {
-					alert("album exists")
+					alert("Album already exists.")
 				}
 				else if (checkAlbumExists() == 1 ) {
 					musicformP1.style.display = 'none';
@@ -157,6 +177,69 @@ window.addEventListener('load', function() {
 					musicformP2.style.display = 'flex';
 					currentP = musicformP2;
 					last.style.display = 'block'
+
+					debugger;
+
+					//DOM MANIPULATION FOR ADDING ARTIST INFO
+
+					//ADD MEMBERS ---------------------------------------------------------------
+
+					addmember.addEventListener('click', function(){
+						var newmember = member0.cloneNode(true);
+						memberlist.appendChild(newmember);
+						backmember.style.display = 'block';
+						currentMember = allmembers.length - 1;
+
+						for (var i = 0; i < allmembers.length; i++) {
+							allmembers[i].style.display = 'none';
+						}
+
+						memberlist.lastChild.style.display = 'block';
+					});
+
+					if (allmembers.length == 1) {addmember.click();}
+
+
+					//MOVE BACKWARD -------------------------------------------------------------
+
+					backmember.addEventListener('click', function(){
+						currentMember -= 1;
+					
+						for (var i = 0; i < alltracks.length; i++) {
+							alltracks[i].style.display = 'none';
+						}
+
+						allmembers[currentMember].style.display = 'block';
+
+						if (currentMember == allmembers.length-1){
+							addmember.style.display = "none";
+							forwardmember.style.display = "block";
+						}
+						else if (currentMember == 1) {
+							backmember.style.display = 'none';
+						}
+					});
+
+					//MOVE FORWARD ----------------------------------------------------------------
+
+					forwardmember.addEventListener('click', function(){
+						currentMember += 1;
+
+						for (var i = 0; i < allmembers.length; i++) {
+							allmembers[i].style.display = 'none';
+						}
+
+						allmembers[currentMember].style.display = 'block';
+
+						if (currentMember == allmembers.length){
+							addmember.style.display = "block";
+							forwardmember.style.display = "none";
+						}
+						else if (currentMember == 1) {
+							backmember.style.display = 'block';
+						}
+					});					
+
 				}
 			});
 		}
@@ -165,6 +248,7 @@ window.addEventListener('load', function() {
 			musicformP2.style.display = 'none';
 			musicformP3.style.display = 'flex';
 			currentP = musicformP3;
+
 		}
 
 		else if (currentP == musicformP3) {
@@ -180,15 +264,17 @@ window.addEventListener('load', function() {
 			next.style.display = "none";
 			addAlbum.innerHTML = "SAVE ALBUM";
 
+			debugger;
+
 			//DOM MANIPULATION FOR TRACKLISTING ----------------------------------------------------
 
 			//ADD TRACKS ---------------------------------
 
 			addtrack.addEventListener('click', function(){
-				var newtrack = track1.cloneNode(true);
-				tracks.appendChild(newtrack);
+				var newtrack = track0.cloneNode(true);
+				tracklist.appendChild(newtrack);
 				backtrack.style.display = 'block';
-				currentTrack = alltracks.length;
+				currentTrack = alltracks.length - 1;
 
 				trackNumDisplay.innerHTML = `Track ${currentTrack}`;
 
@@ -196,9 +282,10 @@ window.addEventListener('load', function() {
 					alltracks[i].style.display = 'none';
 				}
 
-				tracks.lastChild.style.display = 'block';
+				tracklist.lastChild.style.display = 'block';
 			});
 
+			if (alltracks.length == 1) {addtrack.click();}
 
 			//MOVE BACKWARD -------------------------------
 
@@ -210,9 +297,9 @@ window.addEventListener('load', function() {
 					alltracks[i].style.display = 'none';
 				}
 
-				alltracks[currentTrack - 1].style.display = 'block';
+				alltracks[currentTrack].style.display = 'block';
 
-				if (currentTrack == alltracks.length-1){
+				if (currentTrack <= alltracks.length-1){
 					addtrack.style.display = "none";
 					forwardtrack.style.display = "block";
 				}
@@ -231,13 +318,13 @@ window.addEventListener('load', function() {
 					alltracks[i].style.display = 'none';
 				}
 
-				alltracks[currentTrack - 1].style.display = 'block';
+				alltracks[currentTrack].style.display = 'block';
 
-				if (currentTrack == alltracks.length){
+				if (currentTrack == alltracks.length-1){
 					addtrack.style.display = "block";
 					forwardtrack.style.display = "none";
 				}
-				else if (currentTrack == 2) {
+				else if (currentTrack == 1) {
 					backtrack.style.display = 'block';
 				}
 			});
