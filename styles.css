@@ -18,6 +18,8 @@
 	flex-flow: column nowrap;
 	justify-content: space-between;
 	align-items: center;
+	-webkit-transition: height 0.2s ease; /* Safari */
+    transition: height 0.2s ease;
 }
 
 .l-header{
@@ -55,8 +57,9 @@
 }
 
 .headerform__add{
-	margin-left: 270px;
+	width: 450px;
 	font-family: sans-serif;
+	text-align: right;
 	color: #fff;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -121,7 +124,6 @@
 	border: none;
 	height: 34px;
 	width: 300px;
-	margin: 4px;
 	border-radius: 4px;
 	font-size: 20px;
 	font-family: "Oswald", sans-serif;
@@ -159,17 +161,19 @@
 
 .musicform__fileupload{
 	display: flex;
-	align-items: center;
+	align-items: baseline;
+
 }
 
 .musicform__uploadbutton{
-	border: none;
-	padding: 5px 15px;
-	font-size: 14px;
-	color: #333;
-	background-color: #999;
+	margin: 10px 0;
+	color: #999;
+	background-color: #333;
+	font-size: 16px;
+	font-style: italic;
 	border-radius: 5px;
 	font-family: "Oswald", sans-serif;
+	font-weight: 300;
 }
 
 .musicform__imageform{
@@ -182,9 +186,21 @@
 	font-size: 20px;
 	color: #FFF;
 	background-color: #555;
-	margin-left: 10px;
+	margin: 0 10px;
 	cursor: pointer;
 }
+.track{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#tracks{
+	list-style: inline;
+	margin: 0;
+	padding: 0;
+}
+
 #buttons{
 	display: flex;
 }

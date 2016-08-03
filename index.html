@@ -39,8 +39,7 @@
 							<option value="other">Other</option>
 						</select>
 						<div class="musicform__fileupload">
-								<input class="musicform__uploadbutton" type="button" name="file" value="Choose file">
-								<p class="musicform__subtext">No file chosen</p>
+							<input class="musicform__uploadbutton" type="file" name="file" value="Choose file">
 						</div>
 					</div>
 					<div id="addimagebutton" class="musicform__addbutton">+</div>
@@ -66,14 +65,18 @@
 			<div id="musicform-part5" class="musicform">
 				<label class="musicform__label">Album Tracks</label>
 				<div class="musicform__imageform">
-					<div class="imageform">
-						<input class="musicform__textinput" type="text" name="genre" placeholder="Track title">
-						<div class="musicform__fileupload">
-								<input class="musicform__uploadbutton" type="button" name="file" value="Choose file">
-								<p class="musicform__subtext">No file chosen</p>
-						</div>
-					</div>
-					<div id="addimagebutton" class="musicform__addbutton">+</div>
+					<div id="backtrackbutton" class="musicform__addbutton"><</div>
+					<ul id="tracks">
+
+						<li class="track">
+							<input class="musicform__textinput" type="text" name="track" placeholder="Track title">
+							<div class="musicform__fileupload">
+								<input class="musicform__uploadbutton" type="file" name="file" value="Choose file">
+							</div>
+						</li>
+						
+					</ul>
+					<div id="addtrackbutton" class="musicform__addbutton">+</div>
 				</div>
 			</div>
 

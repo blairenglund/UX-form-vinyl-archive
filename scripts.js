@@ -42,15 +42,19 @@ window.addEventListener('load', function() {
 
 	//DOM ----------------------------------------------------------------------------
 
-	//Expand header and open form
+	//Expand header and open form if its closed
 	addAlbum.addEventListener("click", function() {
-		headerform.style.height = "600px";
-		musicform.style.display = "block";
-		musicformP1.style.display = "flex";
-		close.style.display = "block";
-		next.style.display = "block";
-		currentP = musicformP1;
-		debugger;
+		if (currentP == ''){
+			headerform.style.height = "600px";
+			musicform.style.display = "block";
+			musicformP1.style.display = "flex";
+			close.style.display = "block";
+			next.style.display = "block";
+			currentP = musicformP1;
+		}
+		else if (currentP == musicformP5) {
+			alert('album saved')
+		}
 	});
 
 	//Close form and shrink header
@@ -61,6 +65,8 @@ window.addEventListener('load', function() {
 		musicformP2.style.display = "none";
 		musicformP3.style.display = "none";
 		musicformP4.style.display = "none";
+		musicformP5.style.display = "none";
+		addAlbum.innerHTML = "ADD AN ALBUM";
 		next.style.display = "none";
 		last.style.display = "none";
 		close.style.display = "none";
@@ -140,16 +146,32 @@ window.addEventListener('load', function() {
 			musicformP5.style.display = 'flex';
 			currentP = musicformP5;
 			next.style.display = "none";
+			addAlbum.innerHTML = "SAVE ALBUM";
+
+			//the button to add another track
+			var addtrack = document.getElementById('addtrackbutton');
+
+			//the div containing tracks
+			var tracks = document.getElementById('tracks');
+
+			//the first track
+			var track1 = document.getElementsByClassName('track')[0];
+
+			addtrack.addEventListener('click', function(){
+				var newtrack = track1.cloneNode(true);
+				tracks.appendChild(newtrack);
+			});
 		}
 	});
 
 
-	//NEXT BUTTON LISTENER
+	//LAST BUTTON LISTENER
 	last.addEventListener('click', function(){
 		if (currentP == musicformP2) {
 			currentP = musicformP1;
 			musicformP2.style.display = 'none';
 			musicformP1.style.display = 'flex';
+			last.style.display = 'none';
 		}
 		else if (currentP == musicformP3) {
 			currentP = musicformP2;
@@ -165,6 +187,8 @@ window.addEventListener('load', function() {
 			currentP = musicformP4;
 			musicformP5.style.display = 'none';
 			musicformP4.style.display = 'flex';
+			next.style.display = 'block';
+			addAlbum.innerHTML = "ADD AN ALBUM";
 		}
 	
 	})
