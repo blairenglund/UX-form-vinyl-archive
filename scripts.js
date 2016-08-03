@@ -220,6 +220,11 @@ window.addEventListener('load', function() {
 						else if (currentMember == 1) {
 							backmember.style.display = 'none';
 						}
+						else {
+							addmember.style.display = "none";
+							forwardmember.style.display = "block";
+							backmember.style.display = "block";
+						}
 					});
 
 					//MOVE FORWARD ----------------------------------------------------------------
@@ -233,11 +238,11 @@ window.addEventListener('load', function() {
 
 						allmembers[currentMember].style.display = 'block';
 
-						if (currentMember == allmembers.length){
+						if (currentMember == allmembers.length-1){
 							addmember.style.display = "block";
 							forwardmember.style.display = "none";
 						}
-						else if (currentMember == 1) {
+						else if (currentMember == 2) {
 							backmember.style.display = 'block';
 						}
 					});					
@@ -291,7 +296,7 @@ window.addEventListener('load', function() {
 
 			if (alltracks.length == 1) {addtrack.click();}
 
-			//MOVE BACKWARD -------------------------------
+			//MOVE BACKWARD --------------------------------------------------------------
 
 			backtrack.addEventListener('click', function(){
 				currentTrack -= 1;
@@ -303,16 +308,21 @@ window.addEventListener('load', function() {
 
 				alltracks[currentTrack].style.display = 'block';
 
-				if (currentTrack <= alltracks.length-1){
+				if (currentTrack == alltracks.length-1){
 					addtrack.style.display = "none";
 					forwardtrack.style.display = "block";
 				}
-				else if (currentTrack == 2) {
+				else if (currentTrack == 1) {
 					backtrack.style.display = 'none';
+				}
+				else {
+					addtrack.style.display = "none";
+					forwardtrack.style.display = "block";
+					backtrack.style.display = "block"
 				}
 			});
 
-			//MOVE FORWARD ---------------------------------
+			//MOVE FORWARD -----------------------------------------------------------
 
 			forwardtrack.addEventListener('click', function(){
 				currentTrack += 1;
@@ -328,7 +338,7 @@ window.addEventListener('load', function() {
 					addtrack.style.display = "block";
 					forwardtrack.style.display = "none";
 				}
-				else if (currentTrack == 1) {
+				else if (currentTrack == 2) {
 					backtrack.style.display = 'block';
 				}
 			});
