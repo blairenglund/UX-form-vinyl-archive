@@ -14,6 +14,16 @@ window.addEventListener('load', function() {
 	//last page button
 	var last = document.getElementById('lastbutton')
 
+	//the button to add another track
+	var addtrack = document.getElementById('addtrackbutton');
+
+	//the button to go to the previous or next track
+	var backtrack = document.getElementById('backtrackbutton');
+	var forwardtrack = document.getElementById('fortrackbutton');
+
+	//display of the track number
+	var trackNumDisplay = document.getElementById('tracknumber');
+
 
 	//CHANGING ELEMENTS --------------------------------------------------------------
 
@@ -35,12 +45,22 @@ window.addEventListener('load', function() {
 	var musicformP5 = document.getElementById('musicform-part5');
 
 
+	//the div containing tracks
+	var tracks = document.getElementById('tracks');
+
+	//the tracks
+	var alltracks = document.getElementsByClassName('track');
+	var track1 = alltracks[0];
+	var currentTrack = 1;
+
+
 	//keep track of current part of form
 	var currentP = '';
 
 
 
 	//DOM ----------------------------------------------------------------------------
+
 
 	//Expand header and open form if its closed
 	addAlbum.addEventListener("click", function() {
@@ -54,6 +74,14 @@ window.addEventListener('load', function() {
 		}
 		else if (currentP == musicformP5) {
 			alert('album saved')
+			musicform.reset();
+			currentTrack = 1;
+			trackNumDisplay.innerHTML = `Track ${currentTrack}`;
+			for (var i = 1; i < alltracks.length; i++) {
+				alltracks[i].style.display = 'none'
+				tracks.removeChild(alltracks[i]);
+			}
+			alltracks[currentTrack - 1].style.display = 'block';
 		}
 	});
 
@@ -71,14 +99,18 @@ window.addEventListener('load', function() {
 		last.style.display = "none";
 		close.style.display = "none";
 		currentP = '';
+		currentTrack = 1;
+		trackNumDisplay.innerHTML = `Track ${currentTrack}`;
 		musicform.reset();
+		for (var i = 1; i < alltracks.length; i++) {
+			alltracks[i].style.display = 'none'
+			tracks.removeChild(alltracks[i]);
+		}
+		alltracks[currentTrack - 1].style.display = 'block';
 	})
 
 
-
-	//FORM INPUT AND SUBMISSION ----------------------------------------------------
-
-	//NEXT BUTTON EVENT LISTENER
+	//NEXT BUTTON EVENT LISTENER --------------------------------------------------
 	//When next is clicked on first part, see if the album already exists
 	
 	next.addEventListener('click', function() {
@@ -148,23 +180,9 @@ window.addEventListener('load', function() {
 			next.style.display = "none";
 			addAlbum.innerHTML = "SAVE ALBUM";
 
-			//the button to add another track
-			var addtrack = document.getElementById('addtrackbutton');
+			//DOM MANIPULATION FOR TRACKLISTING ----------------------------------------------------
 
-			//the button to go to the previous track and back
-			var backtrack = document.getElementById('backtrackbutton');
-			var forwardtrack = document.getElementById('fortrackbutton');
-
-			//display of the track number
-			var trackNumDisplay = document.getElementById('tracknumber');
-			var currentTrack = 1;
-
-			//the div containing tracks
-			var tracks = document.getElementById('tracks');
-
-			//the tracks
-			var alltracks = document.getElementsByClassName('track');
-			var track1 = alltracks[0];
+			//ADD TRACKS ---------------------------------
 
 			addtrack.addEventListener('click', function(){
 				var newtrack = track1.cloneNode(true);
@@ -181,14 +199,17 @@ window.addEventListener('load', function() {
 				tracks.lastChild.style.display = 'block';
 			});
 
+
+			//MOVE BACKWARD -------------------------------
+
 			backtrack.addEventListener('click', function(){
-				debugger;
 				currentTrack -= 1;
 				trackNumDisplay.innerHTML = `Track ${currentTrack}`;
 			
 				for (var i = 0; i < alltracks.length; i++) {
 					alltracks[i].style.display = 'none';
 				}
+
 				alltracks[currentTrack - 1].style.display = 'block';
 
 				if (currentTrack == alltracks.length-1){
@@ -198,11 +219,28 @@ window.addEventListener('load', function() {
 				else if (currentTrack == 1) {
 					backtrack.style.display = 'none';
 				}
-
-
 			});
 
-			
+			//MOVE FORWARD ---------------------------------
+
+			forwardtrack.addEventListener('click', function(){
+				currentTrack += 1;
+				trackNumDisplay.innerHTML = `Track ${currentTrack}`;
+
+				for (var i = 0; i < alltracks.length; i++) {
+					alltracks[i].style.display = 'none';
+				}
+
+				alltracks[currentTrack - 1].style.display = 'block';
+
+				if (currentTrack == alltracks.length){
+					addtrack.style.display = "block";
+					forwardtrack.style.display = "none";
+				}
+				else if (currentTrack == 2) {
+					backtrack.style.display = 'block';
+				}
+			});
 		}
 	});
 
