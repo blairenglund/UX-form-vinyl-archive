@@ -89,7 +89,11 @@
 #musicform-part1{
 }
 
-#musicform-part2{
+#musicform-part2_1{
+	display: none;
+}
+
+#musicform-part2_2{
 	display: none;
 }
 
