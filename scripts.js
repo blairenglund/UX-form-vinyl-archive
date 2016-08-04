@@ -126,12 +126,14 @@ window.addEventListener('load', function() {
 		last.style.display = "none";
 		close.style.display = "none";
 		currentP = '';
-		trackNumDisplay.innerHTML = `Track ${currentTrack}`;
-		musicform.reset();
 		tracklist.innerHTML = '';
 		memberlist.innerHTML = '';
 		currentTrack = 0;
 		currentMember = 0;
+		allmembers = [];
+		alltracks = [];
+		trackNumDisplay.innerHTML = `Track ${currentTrack}`;
+		musicform.reset();
 		debugger;
 	})
 
