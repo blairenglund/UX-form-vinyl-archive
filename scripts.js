@@ -65,6 +65,9 @@ window.addEventListener('load', function() {
 
 	var currentMember = allmembers.length-1;
 
+	//keep track of whether or not the album artist is in the records
+	var artistIsRecorded = '';
+
 
 	//TRACKLISTING ELEMENTS ----------------------------------------------------------
 
@@ -125,7 +128,10 @@ window.addEventListener('load', function() {
 		trackNumDisplay.innerHTML = `Track ${currentTrack}`;
 		musicform.reset();
 		for (var i = 1; i < alltracks.length; i++) {
-			tracks.removeChild(alltracks[i]);
+			tracklist.removeChild(alltracks[i]);
+		}
+		for (var i = 1; i < allmembers.length; i++) {
+			memberlist.removeChild(allmembers[i]);
 		}
 	})
 
@@ -165,20 +171,23 @@ window.addEventListener('load', function() {
 
 				if (checkAlbumExists() == 0) {
 					alert("Album already exists.")
+					artistIsRecorded = true;
 				}
 				else if (checkAlbumExists() == 1 ) {
 					musicformP1.style.display = 'none';
 					last.style.display = 'block'
 					currentP = musicformP3;
 					musicformP3.style.display = 'flex';
+					artistIsRecorded = true;
 				}
 				else {
 					musicformP1.style.display = 'none';
 					musicformP2.style.display = 'flex';
 					currentP = musicformP2;
 					last.style.display = 'block'
+					artistIsRecorded = false;
 
-					debugger;
+
 
 					//DOM MANIPULATION FOR ADDING ARTIST INFO
 
@@ -271,7 +280,6 @@ window.addEventListener('load', function() {
 			next.style.display = "none";
 			addAlbum.innerHTML = "SAVE ALBUM";
 
-			debugger;
 
 			//DOM MANIPULATION FOR TRACKLISTING ----------------------------------------------------
 
@@ -346,34 +354,56 @@ window.addEventListener('load', function() {
 	});
 
 
-	//LAST BUTTON LISTENER
+	//LAST BUTTON LISTENER ---------------------------------------------------------------
 
-	//
+	//changes depending on whether the artist info is necessary
+
 	last.addEventListener('click', function(){
-		if (currentP == musicformP2) {
-			currentP = musicformP1;
-			musicformP2.style.display = 'none';
-			musicformP1.style.display = 'flex';
-			last.style.display = 'none';
+		if (artistIsRecorded == false) {
+			if (currentP == musicformP2) {
+				currentP = musicformP1;
+				musicformP2.style.display = 'none';
+				musicformP1.style.display = 'flex';
+				last.style.display = 'none';
+			}
+			else if (currentP == musicformP3) {
+				currentP = musicformP2;
+				musicformP3.style.display = 'none';
+				musicformP2.style.display = 'flex';
+			}
+			else if (currentP == musicformP4) {
+				currentP = musicformP3;
+				musicformP4.style.display = 'none';
+				musicformP3.style.display = 'flex';
+			}
+			else if (currentP == musicformP5) {
+				currentP = musicformP4;
+				musicformP5.style.display = 'none';
+				musicformP4.style.display = 'flex';
+				next.style.display = 'block';
+				addAlbum.innerHTML = "ADD AN ALBUM";
+			}
 		}
-		else if (currentP == musicformP3) {
-			currentP = musicformP2;
-			musicformP3.style.display = 'none';
-			musicformP2.style.display = 'flex';
+		else {
+			if (currentP == musicformP3) {
+				currentP = musicformP1;
+				musicformP3.style.display = 'none';
+				musicformP1.style.display = 'flex';
+				last.style.display = 'none';
+			}
+			else if (currentP == musicformP4) {
+				currentP = musicformP3;
+				musicformP4.style.display = 'none';
+				musicformP3.style.display = 'flex';
+			}
+			else if (currentP == musicformP5) {
+				currentP = musicformP4;
+				musicformP5.style.display = 'none';
+				musicformP4.style.display = 'flex';
+				next.style.display = 'block';
+				addAlbum.innerHTML = "ADD AN ALBUM";
+			}			
 		}
-		else if (currentP == musicformP4) {
-			currentP = musicformP3;
-			musicformP4.style.display = 'none';
-			musicformP3.style.display = 'flex';
-		}
-		else if (currentP == musicformP5) {
-			currentP = musicformP4;
-			musicformP5.style.display = 'none';
-			musicformP4.style.display = 'flex';
-			next.style.display = 'block';
-			addAlbum.innerHTML = "ADD AN ALBUM";
-		}
-	
 	})
 
 })
