@@ -63,7 +63,7 @@ window.addEventListener('load', function() {
 	//blank member that get duplicated
 	var member0 = document.querySelector('li.member');
 
-	var currentMember = allmembers.length-1;
+	var currentMember = allmembers.length;
 
 	//keep track of whether or not the album artist is in the records
 	var artistIsRecorded = '';
@@ -80,7 +80,7 @@ window.addEventListener('load', function() {
 	//the blank track form that gets duplicated
 	var track0 = document.querySelector('li.track');
 
-	var currentTrack = alltracks.length-1;
+	var currentTrack = alltracks.length;
 
 
 	//keep track of current part of form ----------------------------------------------
@@ -100,6 +100,8 @@ window.addEventListener('load', function() {
 			close.style.display = "block";
 			next.style.display = "block";
 			currentP = musicformP1;
+			currentTrack = alltracks.length-1;
+			currentMember = allmembers.length-1;
 		}
 		else if (currentP == musicformP5) {
 			alert('album saved')
@@ -124,15 +126,12 @@ window.addEventListener('load', function() {
 		last.style.display = "none";
 		close.style.display = "none";
 		currentP = '';
-		currentTrack = 0;
 		trackNumDisplay.innerHTML = `Track ${currentTrack}`;
 		musicform.reset();
-		for (var i = 1; i < alltracks.length; i++) {
-			tracklist.removeChild(alltracks[i]);
-		}
-		for (var i = 1; i < allmembers.length; i++) {
-			memberlist.removeChild(allmembers[i]);
-		}
+		tracklist.innerHTML = '';
+		memberlist.innerHTML = '';
+		currentTrack = 0;
+		currentMember = 0;
 	})
 
 
@@ -197,9 +196,9 @@ window.addEventListener('load', function() {
 						var newmember = member0.cloneNode(true);
 						memberlist.appendChild(newmember);
 
-						if (allmembers.length > 2) {backmember.style.display = 'block';}
+						if (allmembers.length > 1) {backmember.style.display = 'block';}
 						
-						currentMember = allmembers.length - 1;
+						currentMember = allmembers.length;
 
 						for (var i = 0; i < allmembers.length; i++) {
 							allmembers[i].style.display = 'none';
@@ -208,7 +207,7 @@ window.addEventListener('load', function() {
 						memberlist.lastChild.style.display = 'block';
 					});
 
-					if (allmembers.length == 1) {addmember.click();}
+					if (allmembers.length == 0) {addmember.click();}
 
 
 					//MOVE BACKWARD -------------------------------------------------------------
@@ -220,7 +219,7 @@ window.addEventListener('load', function() {
 							allmembers[i].style.display = 'none';
 						}
 
-						allmembers[currentMember].style.display = 'block';
+						allmembers[currentMember-1].style.display = 'block';
 
 						if (currentMember == allmembers.length-1){
 							addmember.style.display = "none";
@@ -245,13 +244,13 @@ window.addEventListener('load', function() {
 							allmembers[i].style.display = 'none';
 						}
 
-						allmembers[currentMember].style.display = 'block';
+						allmembers[currentMember-1].style.display = 'block';
 
-						if (currentMember == allmembers.length-1){
+						if (currentMember == allmembers.length){
 							addmember.style.display = "block";
 							forwardmember.style.display = "none";
 						}
-						else if (currentMember == 2) {
+						else if (currentMember == 1) {
 							backmember.style.display = 'block';
 						}
 					});					
@@ -302,7 +301,7 @@ window.addEventListener('load', function() {
 				tracklist.lastChild.style.display = 'block';
 			});
 
-			if (alltracks.length == 1) {addtrack.click();}
+			if (alltracks.length == 0) {addtrack.click();}
 
 			//MOVE BACKWARD --------------------------------------------------------------
 
