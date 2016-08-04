@@ -58,7 +58,7 @@ window.addEventListener('load', function() {
 	var memberlist = document.getElementById('members');
 
 	//the members
-	var allmembers = document.getElementsByClassName('member');
+	var allmembers = document.querySelectorAll('ul li.member');
 
 	//blank member that get duplicated
 	var member0 = document.querySelector('li.member');
@@ -75,7 +75,7 @@ window.addEventListener('load', function() {
 	var tracklist = document.getElementById('tracks');
 
 	//the tracks
-	var alltracks = document.getElementsByClassName('track');
+	var alltracks = document.querySelectorAll('ul li.track');
 
 	//the blank track form that gets duplicated
 	var track0 = document.querySelector('li.track');
@@ -100,8 +100,8 @@ window.addEventListener('load', function() {
 			close.style.display = "block";
 			next.style.display = "block";
 			currentP = musicformP1;
-			currentTrack = alltracks.length-1;
-			currentMember = allmembers.length-1;
+			currentTrack = alltracks.length;
+			currentMember = allmembers.length;
 		}
 		else if (currentP == musicformP5) {
 			alert('album saved')
@@ -132,6 +132,7 @@ window.addEventListener('load', function() {
 		memberlist.innerHTML = '';
 		currentTrack = 0;
 		currentMember = 0;
+		debugger;
 	})
 
 
@@ -196,6 +197,8 @@ window.addEventListener('load', function() {
 						var newmember = member0.cloneNode(true);
 						memberlist.appendChild(newmember);
 
+						allmembers = document.querySelectorAll('ul li.member');
+
 						if (allmembers.length > 1) {backmember.style.display = 'block';}
 						
 						currentMember = allmembers.length;
@@ -214,6 +217,8 @@ window.addEventListener('load', function() {
 
 					backmember.addEventListener('click', function(){
 						currentMember -= 1;
+
+						allmembers = document.querySelectorAll('ul li.member');
 					
 						for (var i = 0; i < allmembers.length; i++) {
 							allmembers[i].style.display = 'none';
@@ -221,14 +226,14 @@ window.addEventListener('load', function() {
 
 						allmembers[currentMember-1].style.display = 'block';
 
-						if (currentMember == allmembers.length-1){
+						if (currentMember == allmembers.length){
 							addmember.style.display = "none";
 							forwardmember.style.display = "block";
 						}
 						else if (currentMember == 1) {
 							backmember.style.display = 'none';
 						}
-						else {
+						else if (currentMember < allmembers.length && currentMember > 1) {
 							addmember.style.display = "none";
 							forwardmember.style.display = "block";
 							backmember.style.display = "block";
@@ -239,6 +244,8 @@ window.addEventListener('load', function() {
 
 					forwardmember.addEventListener('click', function(){
 						currentMember += 1;
+
+						allmembers = document.querySelectorAll('ul li.member');
 
 						for (var i = 0; i < allmembers.length; i++) {
 							allmembers[i].style.display = 'none';
@@ -253,9 +260,16 @@ window.addEventListener('load', function() {
 						else if (currentMember == 1) {
 							backmember.style.display = 'block';
 						}
+						else if (currentMember < allmembers.length && currentMember > 1){
+							addmember.style.display = "none";
+							forwardmember.style.display = "block";
+							backmember.style.display = "block";
+						}
 					});					
 
 				}
+
+
 			});
 		}
 
@@ -288,9 +302,11 @@ window.addEventListener('load', function() {
 				var newtrack = track0.cloneNode(true);
 				tracklist.appendChild(newtrack);
 
-				if (alltracks.length > 2) {backtrack.style.display = 'block';}
+				alltracks = document.querySelectorAll('ul li.track')
+
+				if (alltracks.length > 1) {backtrack.style.display = 'block';}
 				
-				currentTrack = alltracks.length - 1;
+				currentTrack = alltracks.length;
 
 				trackNumDisplay.innerHTML = `Track ${currentTrack}`;
 
@@ -308,6 +324,8 @@ window.addEventListener('load', function() {
 			backtrack.addEventListener('click', function(){
 				currentTrack -= 1;
 				trackNumDisplay.innerHTML = `Track ${currentTrack}`;
+
+				alltracks = document.querySelectorAll('ul li.track')
 			
 				for (var i = 0; i < alltracks.length; i++) {
 					alltracks[i].style.display = 'none';
@@ -334,6 +352,8 @@ window.addEventListener('load', function() {
 			forwardtrack.addEventListener('click', function(){
 				currentTrack += 1;
 				trackNumDisplay.innerHTML = `Track ${currentTrack}`;
+
+				alltracks = document.querySelectorAll('ul li.track')
 
 				for (var i = 0; i < alltracks.length; i++) {
 					alltracks[i].style.display = 'none';
