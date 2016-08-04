@@ -54,7 +54,7 @@ window.addEventListener('load', function() {
 
 	//ARTIST INFO ELEMENTS -----------------------------------------------------------
 
-	//the div containing all band members
+	//the ul containing all band members
 	var memberlist = document.getElementById('members');
 
 	//the members
@@ -63,7 +63,8 @@ window.addEventListener('load', function() {
 	//blank member that get duplicated
 	var member0 = document.querySelector('li.member');
 
-	var currentMember = allmembers.length;
+	//current member being added
+	var currentMember = '';
 
 	//keep track of whether or not the album artist is in the records
 	var artistIsRecorded = '';
@@ -71,7 +72,7 @@ window.addEventListener('load', function() {
 
 	//TRACKLISTING ELEMENTS ----------------------------------------------------------
 
-	//the div containing tracks
+	//the ul containing tracks
 	var tracklist = document.getElementById('tracks');
 
 	//the tracks
@@ -80,7 +81,8 @@ window.addEventListener('load', function() {
 	//the blank track form that gets duplicated
 	var track0 = document.querySelector('li.track');
 
-	var currentTrack = alltracks.length;
+	//current track being added
+	var currentTrack = '';
 
 
 	//keep track of current part of form ----------------------------------------------
@@ -102,6 +104,10 @@ window.addEventListener('load', function() {
 			currentP = musicformP1;
 			currentTrack = alltracks.length;
 			currentMember = allmembers.length;
+			allmembers = document.querySelectorAll('ul li.member');
+			alltracks = document.querySelectorAll('ul li.track');
+			track0 = document.querySelector('li.track');
+			member0 = document.querySelector('li.member');
 		}
 		else if (currentP == musicformP5) {
 			alert('album saved')
@@ -114,6 +120,7 @@ window.addEventListener('load', function() {
 
 	//Close form and shrink header
 	close.addEventListener("click", function() {
+		debugger;
 		headerform.style.height = "90px";
 		musicform.style.display = "none";
 		musicformP1.style.display = "none";
@@ -126,13 +133,14 @@ window.addEventListener('load', function() {
 		last.style.display = "none";
 		close.style.display = "none";
 		currentP = '';
-		tracklist.innerHTML = '';
-		memberlist.innerHTML = '';
-		currentTrack = 0;
-		currentMember = 0;
-		allmembers = [];
-		alltracks = [];
-		trackNumDisplay.innerHTML = `Track ${currentTrack}`;
+		currentMember = '';
+		currentTrack = '';
+		while (tracklist.firstChild){
+			tracklist.removeChild(tracklist.firstChild)
+		}
+		while (memberlist.firstChild){
+			memberlist.removeChild(memberlist.firstChild)
+		}
 		musicform.reset();
 		debugger;
 	})
