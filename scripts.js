@@ -14,12 +14,19 @@ window.addEventListener("load", function() {
 	//last page button
 	var last = document.getElementById("lastbutton");
 
-	//the button to add a band member
+	//the button to add a band ber
 	var addmember = document.getElementById("addmemberbutton");
 
 	//the button to go to previous or next member;
 	var forwardmember = document.getElementById("formemberbutton");
 	var backmember = document.getElementById("backmemberbutton");
+
+	//the button to add an album image
+	var addimage = document.getElementById("addimagebutton")
+
+	//the button to go to previous or next image;
+	var forwardimage = document.getElementById("forwardimagebutton");
+	var backimage = document.getElementById("backimagebutton");
 
 	//the button to add another track
 	var addtrack = document.getElementById("addtrackbutton");
@@ -54,6 +61,11 @@ window.addEventListener("load", function() {
 	var musicformP5 = document.getElementById("musicform-part5");
 
 
+	//keep track of current part of form 
+	var currentP = "";
+
+
+
 	//ARTIST INFO ELEMENTS -----------------------------------------------------------
 
 	//the ul containing all band members
@@ -65,7 +77,7 @@ window.addEventListener("load", function() {
 	//blank member that get duplicated
 	var member0 = document.querySelector("li.member");
 
-	//current member being added
+	//current member being viewed
 	var currentMember = "";
 
 	//keep track of whether or not the album artist is in the records
@@ -74,6 +86,22 @@ window.addEventListener("load", function() {
 	//album and artist being entered
 	var albumName = "";
 	var artistName = "";
+
+
+	//ARTIST INFO ELEMENTS -----------------------------------------------------------
+
+	//the ul containing all images
+	var imagelist = document.getElementById("images");
+
+	//the images
+	var allimages = document.querySelectorAll("ul li.image");
+
+	//blank image that gets cloned
+	var image0 = document.querySelector("li.image")
+
+	//current image being viewed
+	var currentImage = "";
+
 
 
 	//TRACKLISTING ELEMENTS ----------------------------------------------------------
@@ -90,9 +118,6 @@ window.addEventListener("load", function() {
 	//current track being added
 	var currentTrack = "";
 
-
-	//keep track of current part of form ----------------------------------------------
-	var currentP = "";
 
 
 
@@ -129,7 +154,8 @@ window.addEventListener("load", function() {
 		headerform.style.height = "90px";
 		musicform.style.display = "none";
 		musicformP1.style.display = "none";
-		musicformP2.style.display = "none";
+		musicformP2_1.style.display = "none";
+		musicformP2_2.style.display = "none";
 		musicformP3.style.display = "none";
 		musicformP4.style.display = "none";
 		musicformP5.style.display = "none";
@@ -210,7 +236,7 @@ window.addEventListener("load", function() {
 		else if (currentP == musicformP2_1) {
 			musicformP2_1.style.display = "none";
 			musicformP2_2.style.display = "flex";
-			currentP = musicformP3;
+			currentP = musicformP2_2;
 		}
 
 		else if (currentP == musicformP2_2) {
@@ -330,11 +356,11 @@ window.addEventListener("load", function() {
 
 		allmembers[currentMember-1].style.display = "block";
 
-		if (currentMember == allmembers.length){
+		if (currentMember == allmembers.length-1){
 			addmember.style.display = "none";
 			forwardmember.style.display = "block";
 		}
-		else if (currentMember == 1) {
+		else if (currentMember == 2) {
 			backmember.style.display = "none";
 		}
 		else if (currentMember < allmembers.length && currentMember > 1) {
@@ -369,7 +395,88 @@ window.addEventListener("load", function() {
 			forwardmember.style.display = "block";
 			backmember.style.display = "block";
 		}
-	});		
+	});	
+
+
+	//DOM MANIPULATION FOR ALBUM IMAGES ----------------------------------------------------------------------------------
+
+	//ADD IMAGES ---------------------------------
+
+	addimage.addEventListener("click", function(){
+		var newimage = image0.cloneNode(true);
+		imagelist.appendChild(newimage);
+
+		allimages = document.querySelectorAll("ul li.image");
+
+		if (allimages.length > 1) {backimage.style.display = "block";}
+		
+		currentImage = allimages.length;
+
+		for (var i = 0; i < allimages.length; i++) {
+			allimages[i].style.display = "none";
+		}
+
+		imagelist.lastChild.style.display = "block";
+	});
+
+	if (allimages.length == 0) {addimage.click();}
+
+
+	//MOVE BACKWARD --------------------------------------------
+
+	backimage.addEventListener("click", function(){
+		currentImage -= 1;
+
+		allimages = document.querySelectorAll("ul li.image");
+	
+		for (var i = 0; i < allimages.length; i++) {
+			allimages[i].style.display = "none";
+		}
+
+		allimages[currentImage-1].style.display = "block";
+
+		if (currentImage == allimages.length){
+			addimage.style.display = "none";
+			forwardimage.style.display = "block";
+		}
+		else if (currentImage == 1) {
+			backimage.style.display = "none";
+		}
+		else if (currentImage < allimages.length && currentImage > 1) {
+			addimage.style.display = "none";
+			forwardimage.style.display = "block";
+			backimage.style.display = "block";
+		}
+	});
+
+	//MOVE FORWARD ------------------------------------------
+
+	forwardimage.addEventListener("click", function(){
+		currentImage += 1;
+
+		allimages = document.querySelectorAll("ul li.image");
+
+		for (var i = 0; i < allimages.length; i++) {
+			allimages[i].style.display = "none";
+		}
+
+		allimages[currentImage-1].style.display = "block";
+
+		if (currentImage == allimages.length){
+			addimage.style.display = "block";
+			forwardimage.style.display = "none";
+		}
+		else if (currentImage == 1) {
+			backimage.style.display = "block";
+		}
+		else if (currentImage < allimages.length && currentImage > 1){
+			addimage.style.display = "none";
+			forwardimage.style.display = "block";
+			backimage.style.display = "block";
+		}
+	});
+
+
 
 	//DOM MANIPULATION FOR TRACKLISTING ----------------------------------------------------------------------------------
 

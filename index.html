@@ -17,7 +17,7 @@
 
 			<div id="musicform-part1" class="musicform">
 				<label class="musicform__label">Album Title</label>
-				<input class="musicform__textinput" type="text" name="album" value="Leonora">
+				<input class="musicform__textinput" type="text" name="album" value="Lovers Know">
 				<label class="musicform__label">Artist Name(s)</label>
 				<input class="musicform__textinput" type="text" name="artist" value="The Mynabirds">
 				<p class="musicform__subtext">Separate multiple artists with a comma.</p>
@@ -45,7 +45,7 @@
 
 			<div id="musicform-part2_2" class="musicform">
 				<label class="musicform__label">Artist Location</label>
-				<input class="musicform__textinput" type="text" name="genre" value="2015">
+				<input class="musicform__textinput" type="text" name="genre" value="Omaha">
 				<label class="musicform__label">Artist Image</label>
 				<input class="musicform__uploadbutton" type="file" name="file" value="Choose file">
 			</div>
@@ -53,19 +53,25 @@
 			<div id="musicform-part3" class="musicform">
 				<label class="musicform__label">Album Images</label>
 				<div class="musicform__imageform">
-					<div class="imageform">
+
+					<div id="backimagebutton" class="musicform__addbutton"><</div>
+
+					<li class="image">
 						<select name="imgtype" class="musicform__select">
 							<option value="cover" selected>Cover</option>
 							<option value="reverse">Reverse</option>
 							<option value="sleeve">Sleeve</option>
 							<option value="insert">Insert</option>
 							<option value="other">Other</option>
-						</select>
-						<div class="musicform__fileupload">
-							<input class="musicform__uploadbutton" type="file" name="file" value="Choose file">
-						</div>
-					</div>
+						</select><br>
+						<input class="musicform__uploadbutton" type="file" name="file" value="Choose file">
+					</li>
+
+					<ul id="images"></ul>
+
+
 					<div id="addimagebutton" class="musicform__addbutton">+</div>
+					<div id="forwardimagebutton" class="musicform__addbutton">></div>
 				</div>
 			</div>
 
