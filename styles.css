@@ -26,6 +26,14 @@
 	flex-flow: row nowrap;
 }
 
+.l-inputspace{
+	margin-bottom: 10px;
+}
+
+.icon{
+	height: 24px;
+}
+
 .headerform__logo{
 	background-color: #FFF;
 	height: 90px;
@@ -106,6 +114,11 @@
 	display: none;
 }
 
+#success{
+	display: none;
+	text-align: center;
+}
+
 .musicform{
 	display: flex;
 	flex-flow: column nowrap;
@@ -182,13 +195,14 @@
 }
 
 .musicform__addbutton{
-	height: 70px;
-	width: 20px;
+	padding: 20px 5px;
 	font-size: 20px;
 	color: #FFF;
 	background-color: #555;
 	margin: 0 10px;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
 }
 
 .track{

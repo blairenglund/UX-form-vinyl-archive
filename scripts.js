@@ -60,6 +60,10 @@ window.addEventListener("load", function() {
 	//fifth part - tracklisting
 	var musicformP5 = document.getElementById("musicform-part5");
 
+	//success screen
+	var successView = document.getElementById("success");
+	var successMessage = document.getElementById("success-message");
+
 
 	//keep track of current part of form 
 	var currentP = "";
@@ -141,11 +145,17 @@ window.addEventListener("load", function() {
 			member0 = document.querySelector("li.member");
 		}
 		else if (currentP == musicformP5) {
-			alert("album saved");
+			//---RECORD THE FORM DATA---//
 
-			//RECORD THE FORM DATA//
+			currentP = successView;
+			successView.style.display = "block";
+			musicformP5.style.display = "none";
+			next.style.display = "none";
+			last.style.display = "none";
+			successMessage.innerHTML = `Thank you for uploading<br>"${albumName}" by ${artistName}!`;
+			addAlbum.innerHTML = "ADD ANOTHER ALBUM";
+			musicform.reset();
 
-			close.click();
 		}
 	});
 
@@ -182,8 +192,8 @@ window.addEventListener("load", function() {
 	next.addEventListener("click", function() {
 		if (currentP == musicformP1) {
 
-			var albumName = musicform[0].value;
-			var artistName = musicform[1].value;
+			albumName = musicform[0].value;
+			artistName = musicform[1].value;
 
 			var request = new XMLHttpRequest();
 
@@ -329,7 +339,7 @@ window.addEventListener("load", function() {
 
 		allmembers = document.querySelectorAll("ul li.member");
 
-		if (allmembers.length > 1) {backmember.style.display = "block";}
+		if (allmembers.length > 1) {backmember.style.display = "flex";}
 		
 		currentMember = allmembers.length;
 
@@ -358,15 +368,15 @@ window.addEventListener("load", function() {
 
 		if (currentMember == allmembers.length-1){
 			addmember.style.display = "none";
-			forwardmember.style.display = "block";
+			forwardmember.style.display = "flex";
 		}
 		else if (currentMember == 2) {
 			backmember.style.display = "none";
 		}
 		else if (currentMember < allmembers.length && currentMember > 1) {
 			addmember.style.display = "none";
-			forwardmember.style.display = "block";
-			backmember.style.display = "block";
+			forwardmember.style.display = "flex";
+			backmember.style.display = "flex";
 		}
 	});
 
@@ -384,16 +394,16 @@ window.addEventListener("load", function() {
 		allmembers[currentMember-1].style.display = "block";
 
 		if (currentMember == allmembers.length){
-			addmember.style.display = "block";
+			addmember.style.display = "flex";
 			forwardmember.style.display = "none";
 		}
 		else if (currentMember == 1) {
-			backmember.style.display = "block";
+			backmember.style.display = "flex";
 		}
 		else if (currentMember < allmembers.length && currentMember > 1){
 			addmember.style.display = "none";
-			forwardmember.style.display = "block";
-			backmember.style.display = "block";
+			forwardmember.style.display = "flex";
+			backmember.style.display = "flex";
 		}
 	});	
 
@@ -408,7 +418,7 @@ window.addEventListener("load", function() {
 
 		allimages = document.querySelectorAll("ul li.image");
 
-		if (allimages.length > 1) {backimage.style.display = "block";}
+		if (allimages.length > 1) {backimage.style.display = "flex";}
 		
 		currentImage = allimages.length;
 
@@ -435,17 +445,17 @@ window.addEventListener("load", function() {
 
 		allimages[currentImage-1].style.display = "block";
 
-		if (currentImage == allimages.length){
+		if (currentImage == allimages.length-1){
 			addimage.style.display = "none";
-			forwardimage.style.display = "block";
+			forwardimage.style.display = "flex";
 		}
 		else if (currentImage == 1) {
 			backimage.style.display = "none";
 		}
 		else if (currentImage < allimages.length && currentImage > 1) {
 			addimage.style.display = "none";
-			forwardimage.style.display = "block";
-			backimage.style.display = "block";
+			forwardimage.style.display = "flex";
+			backimage.style.display = "flex";
 		}
 	});
 
@@ -463,16 +473,16 @@ window.addEventListener("load", function() {
 		allimages[currentImage-1].style.display = "block";
 
 		if (currentImage == allimages.length){
-			addimage.style.display = "block";
+			addimage.style.display = "flex";
 			forwardimage.style.display = "none";
 		}
 		else if (currentImage == 1) {
-			backimage.style.display = "block";
+			backimage.style.display = "flex";
 		}
 		else if (currentImage < allimages.length && currentImage > 1){
 			addimage.style.display = "none";
-			forwardimage.style.display = "block";
-			backimage.style.display = "block";
+			forwardimage.style.display = "flex";
+			backimage.style.display = "flex";
 		}
 	});
 
@@ -488,7 +498,7 @@ window.addEventListener("load", function() {
 
 		alltracks = document.querySelectorAll("ul li.track")
 
-		if (alltracks.length > 1) {backtrack.style.display = "block";}
+		if (alltracks.length > 1) {backtrack.style.display = "flex";}
 		
 		currentTrack = alltracks.length;
 
@@ -517,17 +527,17 @@ window.addEventListener("load", function() {
 
 		alltracks[currentTrack].style.display = "block";
 
-		if (currentTrack == alltracks.length-1){
+		if (currentTrack == alltracks.length){
 			addtrack.style.display = "none";
-			forwardtrack.style.display = "block";
+			forwardtrack.style.display = "flex";
 		}
-		else if (currentTrack == 1) {
+		else if (currentTrack == 2) {
 			backtrack.style.display = "none";
 		}
 		else {
 			addtrack.style.display = "none";
-			forwardtrack.style.display = "block";
-			backtrack.style.display = "block"
+			forwardtrack.style.display = "flex";
+			backtrack.style.display = "flex"
 		}
 	});
 
@@ -546,11 +556,11 @@ window.addEventListener("load", function() {
 		alltracks[currentTrack].style.display = "block";
 
 		if (currentTrack == alltracks.length-1){
-			addtrack.style.display = "block";
+			addtrack.style.display = "flex";
 			forwardtrack.style.display = "none";
 		}
-		else if (currentTrack == 2) {
-			backtrack.style.display = "block";
+		else if (currentTrack == 1) {
+			backtrack.style.display = "flex";
 		}
 	});
 

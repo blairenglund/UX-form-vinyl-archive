@@ -11,7 +11,7 @@
 <div class="main">
 	<div id="headerform" class="headerform">
 
-		<div id="close" class="headerform__close">x</div>
+		<div id="close" class="headerform__close"><img class="icon" src="images/close.png"></div>
 
 		<form id="musicform" method="post">
 
@@ -28,18 +28,18 @@
 				<label class="musicform__label">Add Members</label>
 				<div class="musicform__imageform">
 
-					<div id="backmemberbutton" class="musicform__addbutton"><</div>
+					<div id="backmemberbutton" class="musicform__addbutton"><img class="icon" src="images/arrow-back.png"></div>
 
 					<li class="member">
-						<input class="musicform__textinput" type="text" name="membername" placeholder="Name"><br>
+						<input class="musicform__textinput l-inputspace" type="text" name="membername" placeholder="Name"><br>
 						<input class="musicform__textinput" type="text" name="memberinstrument" placeholder="Instrument(s)">
 						<p class="musicform__subtext">Separate multiple instruments with a comma.</p>
 					</li>
 
 					<ul id="members"></ul>
 
-					<div id="addmemberbutton" class="musicform__addbutton">+</div>
-					<div id="formemberbutton" class="musicform__addbutton">></div>
+					<div id="addmemberbutton" class="musicform__addbutton"><img class="icon" src="images/plus.png"></div>
+					<div id="formemberbutton" class="musicform__addbutton"><img class="icon" src="images/Arrow-forward.png"></div>
 				</div>
 			</div>
 
@@ -54,7 +54,7 @@
 				<label class="musicform__label">Album Images</label>
 				<div class="musicform__imageform">
 
-					<div id="backimagebutton" class="musicform__addbutton"><</div>
+					<div id="backimagebutton" class="musicform__addbutton"><img class="icon" src="images/arrow-back.png"></div>
 
 					<li class="image">
 						<select name="imgtype" class="musicform__select">
@@ -70,8 +70,8 @@
 					<ul id="images"></ul>
 
 
-					<div id="addimagebutton" class="musicform__addbutton">+</div>
-					<div id="forwardimagebutton" class="musicform__addbutton">></div>
+					<div id="addimagebutton" class="musicform__addbutton"><img class="icon" src="images/plus.png"></div>
+					<div id="forwardimagebutton" class="musicform__addbutton"><img class="icon" src="images/Arrow-forward.png"></div>
 				</div>
 			</div>
 
@@ -96,7 +96,7 @@
 				<label class="musicform__label">Album Tracks</label>
 				<div class="musicform__imageform">
 
-					<div id="backtrackbutton" class="musicform__addbutton"><</div>
+					<div id="backtrackbutton" class="musicform__addbutton"><img class="icon" src="images/arrow-back.png"></div>
 
 					<li class="track">
 						<input class="musicform__textinput" type="text" name="trackname" placeholder="Track title">
@@ -107,10 +107,15 @@
 
 					<ul id="tracks"></ul>
 
-					<div id="addtrackbutton" class="musicform__addbutton">+</div>
-					<div id="fortrackbutton" class="musicform__addbutton">></div>
+					<div id="addtrackbutton" class="musicform__addbutton"><img class="icon" src="images/plus.png"></div>
+					<div id="fortrackbutton" class="musicform__addbutton"><img class="icon" src="images/Arrow-forward.png"></div>
 
 				</div>
+			</div>
+
+			<div id="success">
+				<p id="success-message" class="musicform__label"></p>
+				<p class="musicform__label">SHARE THE ALBUM <img class="icon" src="images/twitter.png">&nbsp;<img class="icon" src="images/facebook.png"></p>
 			</div>
 
 			<div id="buttons">	
