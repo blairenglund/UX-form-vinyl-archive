@@ -77,12 +77,13 @@
 
 .headerform__close{
 	color: #FFF;
-	font-size: 20px;
 	background-color: #555;
 	font-family: sans-serif;
 	display: none;
 	align-self: flex-end;
-	padding: 5px 10px;
+	height: 26px;
+	width: 26px;
+	padding: 5px;
 	cursor: pointer;
 }
 
@@ -153,12 +154,10 @@
 
 .musicform__button{
 	background-color: #555;
-	height: 30px;
-	width: 30px;
+	height: 24px;
+	padding: 5px;
 	border-radius: 2px;
 	margin: 0px 20px;
-	text-align: center;
-	font-size: 24px;
 	color: #FFF;
 	cursor: pointer;
 }
@@ -175,10 +174,10 @@
 .musicform__fileupload{
 	display: flex;
 	align-items: baseline;
-
 }
 
 .musicform__uploadbutton{
+	display: block;
 	margin: 10px 0;
 	color: #999;
 	background-color: #333;
@@ -187,6 +186,11 @@
 	border-radius: 5px;
 	font-family: "Oswald", sans-serif;
 	font-weight: 300;
+	width: 300px;
+}
+
+.musicform__uploadbutton:active{
+	background-color: #333;
 }
 
 .musicform__imageform{
