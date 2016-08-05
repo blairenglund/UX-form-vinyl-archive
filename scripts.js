@@ -139,12 +139,12 @@ window.addEventListener("load", function() {
 			currentP = musicformP1;
 			currentTrack = alltracks.length;
 			currentMember = allmembers.length;
+			currentImage = allimages.length;
 			allmembers = document.querySelectorAll("ul li.member");
+			allimages = document.querySelectorAll("ul li.image")
 			alltracks = document.querySelectorAll("ul li.track");
 			track0 = document.querySelector("li.track");
 			member0 = document.querySelector("li.member");
-
-			debugger;
 
 			if (allmembers.length == 0) {addmember.click();};
 
@@ -154,7 +154,8 @@ window.addEventListener("load", function() {
 
 		}
 		else if (currentP == musicformP5) {
-			//---RECORD THE FORM DATA---//
+			
+			//submit and record form data
 
 			currentP = successView;
 			successView.style.display = "block";
@@ -164,7 +165,10 @@ window.addEventListener("load", function() {
 			successMessage.innerHTML = `Thank you for uploading<br>"${albumName}" by ${artistName}!`;
 			addAlbum.innerHTML = "ADD ANOTHER ALBUM";
 			musicform.reset();
-
+		}
+		else if (currentP == successView) {
+			close.click();
+			addAlbum.click();
 		}
 	});
 
@@ -187,6 +191,7 @@ window.addEventListener("load", function() {
 		currentP = "";
 		currentMember = "";
 		currentTrack = "";
+		currentImage = "";
 		while (tracklist.firstChild){
 			tracklist.removeChild(tracklist.firstChild);
 		}
@@ -209,52 +214,56 @@ window.addEventListener("load", function() {
 			albumName = musicform[0].value;
 			artistName = musicform[1].value;
 
-			var request = new XMLHttpRequest();
+			if (artistName != "" && albumName !="") {
 
-			//open the album info to check that the album doesn"t already exist
-			request.open("GET", "album_info.json");
-			request.send();
+				var request = new XMLHttpRequest();
 
-			//When file loads, check  to see if the album name exists
-			//if it exists then check if it"s by the same artist
-			//if it"s the same album and artist, return a message that says "album exists"
-			request.addEventListener("load", function(e){
+				//open the album info to check that the album doesn"t already exist
+				request.open("GET", "album_info.json");
+				request.send();
 
-				var allalbums = JSON.parse(e.target.response);
+				//When file loads, check  to see if the album name exists
+				//if it exists then check if it"s by the same artist
+				//if it"s the same album and artist, return a message that says "album exists"
+				request.addEventListener("load", function(e){
 
-				//CHECKS IF ALBUM AND ARTIST ARE IN DB
-				//returns 0 if the album and artist exist
-				//returns 1 if the album doesn"t exist but the artist does
-				function checkAlbumExists() {
-					for (var i = 0; i < allalbums.length; i++) {
-						if (allalbums[i].album == albumName && allalbums[i].artist == artistName){
-							return 0;
-						}
-						else if (allalbums[i].album != albumName && allalbums[i].artist == artistName) {
-							return 1;
+					var allalbums = JSON.parse(e.target.response);
+
+					//CHECKS IF ALBUM AND ARTIST ARE IN DB
+					//returns 0 if the album and artist exist
+					//returns 1 if the album doesn"t exist but the artist does
+					function checkAlbumExists() {
+						for (var i = 0; i < allalbums.length; i++) {
+							if (allalbums[i].album == albumName && allalbums[i].artist == artistName){
+								return 0;
+							}
+							else if (allalbums[i].album != albumName && allalbums[i].artist == artistName) {
+								return 1;
+							}
 						}
 					}
-				}
 
-				if (checkAlbumExists() == 0) {
-					alert("Album already exists.")
-					artistIsRecorded = true;
-				}
-				else if (checkAlbumExists() == 1 ) {
-					musicformP1.style.display = "none";
-					last.style.display = "block"
-					currentP = musicformP3;
-					musicformP3.style.display = "flex";
-					artistIsRecorded = true;
-				}
-				else {
-					musicformP1.style.display = "none";
-					musicformP2_1.style.display = "flex";
-					currentP = musicformP2_1;
-					last.style.display = "block"
-					artistIsRecorded = false;
-				}
-			});
+					if (checkAlbumExists() == 0) {
+						alert("Album already exists.")
+						artistIsRecorded = true;
+					}
+					else if (checkAlbumExists() == 1 ) {
+						musicformP1.style.display = "none";
+						last.style.display = "block"
+						currentP = musicformP3;
+						musicformP3.style.display = "flex";
+						artistIsRecorded = true;
+					}
+					else {
+						musicformP1.style.display = "none";
+						musicformP2_1.style.display = "flex";
+						currentP = musicformP2_1;
+						last.style.display = "block"
+						artistIsRecorded = false;
+					}
+				});
+			}
+			else {alert("Please enter an album and artist.")}
 		}
 
 		else if (currentP == musicformP2_1) {
